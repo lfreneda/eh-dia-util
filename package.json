@@ -1,0 +1,43 @@
+{
+  "name": "eh-dia-util",
+  "version": "1.0.0",
+  "description": "Hoje é um dia útil? Qual é o próximo dia útil? Pequena lógica para determinar o próximo (ou se hoje é) dia útil considerando fériados nacionais (móveis ou não).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/*.spec.js",
+    "autotest": "./node_modules/.bin/supervisor -q -n exit -x npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfreneda/eh-dia-util.git"
+  },
+  "keywords": [
+    "feriados",
+    "brasil",
+    "brazil",
+    "holidays",
+    "business",
+    "day",
+    "working-day",
+    "business-day",
+    "feriado",
+    "dia-útil"
+  ],
+  "author": "Luiz Freneda <lfreneda@gmail.com> (http://www.freneda.com.br/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lfreneda/eh-dia-util/issues"
+  },
+  "homepage": "https://github.com/lfreneda/eh-dia-util#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.0",
+    "supervisor": "^0.12.0"
+  },
+  "dependencies": {
+    "moment": "^2.18.1"
+  }
+}
