@@ -1,3 +1,5 @@
+'use strict';
+
 var moment = require('moment');
 var getBraziliansYearHolidays = require('./lib/brazilianHolidays');
 
