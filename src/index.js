@@ -8,17 +8,34 @@ const ehDiaUtil = (date, stateCode) => {
     return false
   }
 
-  const dayOfWeek = givenDate.day()
-  const isWeekend = (dayOfWeek === 6 || dayOfWeek === 0)
-  if (isWeekend) {
+  if (ehFinalDeSemana(givenDate)) {
     return false
   }
 
-  if (isNationalHoliday(givenDate) || isStateHoliday(givenDate, stateCode)) {
+  if (ehFeriado(date, stateCode)) {
     return false
   }
 
   return true
 }
 
+const ehFinalDeSemana = (givenDate) => {
+  const dayOfWeek = givenDate.day()
+  const isWeekend = (dayOfWeek === 6 || dayOfWeek === 0)
+  return isWeekend
+}
+
+const ehFeriado = (date, stateCode) => {
+  const givenDate = moment(date)
+  if (!givenDate.isValid()) {
+    return false
+  }
+  if (isNationalHoliday(givenDate) || isStateHoliday(givenDate, stateCode)) {
+    return true
+  }
+  return false
+}
+
 module.exports = ehDiaUtil
+module.exports.ehFeriado = ehFeriado
+module.exports.ehFinalDeSemana = ehFinalDeSemana
