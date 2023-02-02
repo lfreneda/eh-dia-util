@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "mocha test/*.spec.js",
-    "autotest": "./node_modules/.bin/supervisor -q -n exit -x npm test"
+    "autotest": "./node_modules/.bin/supervisor -q -n exit -x npm test",
+    "start": "node exec"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "supervisor": "^0.12.0"
   },
   "dependencies": {
+    "date-easter": "^1.0.2",
     "moment": "^2.18.1"
   }
 }
