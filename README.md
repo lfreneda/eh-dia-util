@@ -20,8 +20,8 @@ npm install @lfreneda/eh-dia-util --save
 ## Exemplos
 
 ```js
-const ehDiaUtil = require('@lfreneda/eh-dia-util')
-ehDiaUtil('2020-05-15') // true
+import { isBusinessDay } from '@lfreneda/eh-dia-util'
+isBusinessDay('2020-05-15') // true
 ```
 
 Todos os exemplos estão [aqui!](https://github.com/lfreneda/eh-dia-util/blob/master/test/index.spec.js)
