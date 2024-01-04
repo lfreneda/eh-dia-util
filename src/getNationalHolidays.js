@@ -1,4 +1,4 @@
-const moment = require('moment')
+import moment from 'moment'
 
 const _calculateEaster = (year) => {
   const C = Math.floor(year / 100)
@@ -62,7 +62,4 @@ const isNationalHoliday = (givenDate) => {
   return false
 }
 
-module.exports = {
-  getNationalHolidays,
-  isNationalHoliday
-}
+export { getNationalHolidays, isNationalHoliday }
