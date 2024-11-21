@@ -3,18 +3,18 @@
     no-unused-expressions,
     no-unused-vars
 */
-var expect = require('chai').expect
-var moment = require('moment')
-var ehDiaUtil = require('../src/')
+import chai from 'chai'
+import moment from 'moment'
+import { isBusinessDay } from '../src/index.js'
 
 describe('É dia útil?', function () {
   it('Dado uma data inválida, o resultado esperado é false', function () {
-    expect(ehDiaUtil('8787-52-67')).to.equal(false)
+    chai.expect(isBusinessDay('8787-52-67')).to.equal(false)
   })
 })
 
 describe('É dia útil? (Não considerando o estado)', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2017-09-11', description: 'uma Segunda', expectedResult: true },
     { givenDate: '2017-09-12', description: 'uma Terça', expectedResult: true },
     { givenDate: '2017-09-13', description: 'uma Quarta', expectedResult: true },
@@ -66,7 +66,7 @@ describe('É dia útil? (Não considerando o estado)', function () {
 
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate)).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate)).to.equal(test.expectedResult)
     })
   })
 })
@@ -79,7 +79,7 @@ describe('É dia útil? (Não considerando o estado)', function () {
 */
 
 describe('É dia útil no estado do Acre?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2000-01-23', description: 'Dia do evangélico - Lei Estadual nº 1.538/2004', expectedResult: false },
     { givenDate: '2000-03-08', description: 'Alusivo ao Dia Internacional da Mulher - Lei Estadual nº 1.411/2001', expectedResult: false },
     { givenDate: '2000-06-15', description: 'Aniversário do estado - Lei Estadual nº 14/1964', expectedResult: false },
@@ -88,7 +88,7 @@ describe('É dia útil no estado do Acre?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'AC')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'AC')).to.equal(test.expectedResult)
     })
   })
 })
@@ -98,7 +98,7 @@ describe('É dia útil no estado do Acre?', function () {
 */
 
 describe('É dia útil no estado de Santa Catarina?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-08-11', description: 'Dia de Santa Catarina (criação da capitania, separando-se de São Paulo)', expectedResult: false },
     { givenDate: '2020-08-11', description: 'Dia de Santa Catarina (criação da capitania, separando-se de São Paulo)', expectedResult: false },
     { givenDate: '2021-08-11', description: 'Dia de Santa Catarina (criação da capitania, separando-se de São Paulo)', expectedResult: false },
@@ -108,13 +108,13 @@ describe('É dia útil no estado de Santa Catarina?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'SC')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'SC')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de São Paulo?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2000-07-09', description: 'Revolução Constitucionalista de 1932 - Lei estadual nº 9.497/1997', expectedResult: false },
     { givenDate: '2013-07-09', description: 'Revolução Constitucionalista de 1932 - Lei estadual nº 9.497/1997', expectedResult: false },
     { givenDate: '2018-07-09', description: 'Revolução Constitucionalista de 1932 - Lei estadual nº 9.497/1997', expectedResult: false },
@@ -122,13 +122,13 @@ describe('É dia útil no estado de São Paulo?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'SP')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'SP')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Sergipe?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2000-07-08', description: 'Emancipação política de Sergipe - Art. 269 da Constituição estadual', expectedResult: false },
     { givenDate: '2012-07-08', description: 'Emancipação política de Sergipe - Art. 269 da Constituição estadual', expectedResult: false },
     { givenDate: '2019-07-08', description: 'Emancipação política de Sergipe - Art. 269 da Constituição estadual', expectedResult: false },
@@ -136,13 +136,13 @@ describe('É dia útil no estado de Sergipe?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'SE')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'SE')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Tocantins?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2001-10-05', description: 'Criação do estado - Lei estadual nº 98/1989', expectedResult: false },
     { givenDate: '2040-10-05', description: 'Criação do estado - Lei estadual nº 98/1989', expectedResult: false },
     { givenDate: '2045-10-05', description: 'Criação do estado - Lei estadual nº 98/1989', expectedResult: false },
@@ -161,13 +161,13 @@ describe('É dia útil no estado de Tocantins?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'TO')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'TO')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Roraima?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '1988-10-05', description: 'Criação do estado - Art. 9 da Constituição estadual', expectedResult: false },
     { givenDate: '1995-10-05', description: 'Criação do estado - Art. 9 da Constituição estadual', expectedResult: false },
     { givenDate: '2000-10-05', description: 'Criação do estado - Art. 9 da Constituição estadual', expectedResult: false },
@@ -176,13 +176,13 @@ describe('É dia útil no estado de Roraima?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'RR')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'RR')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Rondônia?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-01-04', description: 'Criação do estado - Lei estadual nº 2291/2010', expectedResult: false },
     { givenDate: '2020-01-04', description: 'Criação do estado - Lei estadual nº 2291/2010', expectedResult: false },
     { givenDate: '2021-01-04', description: 'Criação do estado - Lei estadual nº 2291/2010', expectedResult: false },
@@ -195,38 +195,38 @@ describe('É dia útil no estado de Rondônia?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'RO')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'RO')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Rio Grande do Sul?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '1999-09-20', description: 'Proclamação da República Rio-Grandense - Art. 6, parágrafo único da constituição estadual', expectedResult: false },
     { givenDate: '2019-09-20', description: 'Proclamação da República Rio-Grandense - Art. 6, parágrafo único da constituição estadual', expectedResult: false },
     { givenDate: '2030-09-20', description: 'Proclamação da República Rio-Grandense - Art. 6, parágrafo único da constituição estadual', expectedResult: false }
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'RS')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'RS')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Rio Grande do Norte?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-10-03', description: 'Mártires de Cunhaú e Uruaçu - Lei estadual nº 8.913/2006', expectedResult: false },
     { givenDate: '2022-10-03', description: 'Mártires de Cunhaú e Uruaçu - Lei estadual nº 8.913/2006', expectedResult: false }
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'RN')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'RN')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Piauí?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2000-10-19', description: 'Dia do Piauí - Lei estadual nº 176/1937', expectedResult: false },
     { givenDate: '2002-10-19', description: 'Dia do Piauí - Lei estadual nº 176/1937', expectedResult: false },
     { givenDate: '2008-10-19', description: 'Dia do Piauí - Lei estadual nº 176/1937', expectedResult: false },
@@ -235,13 +235,13 @@ describe('É dia útil no estado de Piauí?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'PI')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'PI')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Pernambuco?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-03-06', description: 'Revolução Pernambucana de 1817 - Lei estadual nº 13.835/2009', expectedResult: false },
     { givenDate: '2019-06-24', description: 'Festa de São João (Festa Junina) - Feriado Estadual', expectedResult: false },
     { givenDate: '2019-07-16', description: 'Dia de Nossa Senhora do Carmo (Padroeira da Cidade do Recife) - Feriado religioso', expectedResult: false },
@@ -251,13 +251,13 @@ describe('É dia útil no estado de Pernambuco?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'PE')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'PE')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Paraná?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '1997-12-19', description: 'Emancipação política do estado do Paraná - Lei estadual nº 4.658/1962', expectedResult: false },
     { givenDate: '2005-12-19', description: 'Emancipação política do estado do Paraná - Lei estadual nº 4.658/1962', expectedResult: false },
     { givenDate: '2019-12-19', description: 'Emancipação política do estado do Paraná - Lei estadual nº 4.658/1962', expectedResult: false },
@@ -265,13 +265,13 @@ describe('É dia útil no estado de Paraná?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'PR')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'PR')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Paraíba?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2010-07-26', description: 'Homenagem à memória do ex-presidente João Pessoa - Lei Estadual 3.489/67, Art. 2º', expectedResult: false },
     { givenDate: '2012-07-26', description: 'Homenagem à memória do ex-presidente João Pessoa - Lei Estadual 3.489/67, Art. 2º', expectedResult: false },
     { givenDate: '2013-07-26', description: 'Homenagem à memória do ex-presidente João Pessoa - Lei Estadual 3.489/67, Art. 2º', expectedResult: false },
@@ -284,13 +284,13 @@ describe('É dia útil no estado de Paraíba?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'PB')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'PB')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Pará?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '1996-08-15', description: 'Adesão do Pará à independência do Brasil - Lei estadual nº 5.999/1996', expectedResult: false },
     { givenDate: '2000-08-15', description: 'Adesão do Pará à independência do Brasil - Lei estadual nº 5.999/1996', expectedResult: false },
     { givenDate: '2001-08-15', description: 'Adesão do Pará à independência do Brasil - Lei estadual nº 5.999/1996', expectedResult: false },
@@ -300,26 +300,26 @@ describe('É dia útil no estado de Pará?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'PA')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'PA')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Minas Gerais?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2002-04-21', description: 'Data magna do estado - Art. 256 da constituição estadual[43]; coincide com o feriado nacional de Tiradentes', expectedResult: false },
     { givenDate: '2019-04-21', description: 'Data magna do estado - Art. 256 da constituição estadual[43]; coincide com o feriado nacional de Tiradentes', expectedResult: false },
     { givenDate: '2040-04-21', description: 'Data magna do estado - Art. 256 da constituição estadual[43]; coincide com o feriado nacional de Tiradentes', expectedResult: false }
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'MG')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'MG')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Mato Grosso do Sul?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-10-11', description: 'Criação do estado - Lei estadual nº 10/1979', expectedResult: false },
     { givenDate: '2020-10-11', description: 'Criação do estado - Lei estadual nº 10/1979', expectedResult: false },
     { givenDate: '2022-10-11', description: 'Criação do estado - Lei estadual nº 10/1979', expectedResult: false },
@@ -328,25 +328,25 @@ describe('É dia útil no estado de Mato Grosso do Sul?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'MS')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'MS')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Mato Grosso?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-11-20', description: 'Dia da Consciência Negra - Lei estadual nº 7.879/2002', expectedResult: false },
     { givenDate: '2023-11-20', description: 'Dia da Consciência Negra - Lei estadual nº 7.879/2002', expectedResult: false }
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'MT')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'MT')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado de Maranhão?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-07-28', description: 'Adesão do Maranhão à independência do Brasil - Lei estadual nº 2.457/1964', expectedResult: false },
     { givenDate: '2020-07-28', description: 'Adesão do Maranhão à independência do Brasil - Lei estadual nº 2.457/1964', expectedResult: false },
     { givenDate: '2021-07-28', description: 'Adesão do Maranhão à independência do Brasil - Lei estadual nº 2.457/1964', expectedResult: false },
@@ -354,7 +354,7 @@ describe('É dia útil no estado de Maranhão?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'MA')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'MA')).to.equal(test.expectedResult)
     })
   })
 })
@@ -364,7 +364,7 @@ describe('É dia útil no estado de Espírito Santo?', function () {
 })
 
 describe('É dia útil no estado de Alagoas?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-06-24', description: 'São João - Lei estadual nº 5.508/1993', expectedResult: false },
     { givenDate: '2020-06-24', description: 'São João - Lei estadual nº 5.508/1993', expectedResult: false },
     { givenDate: '2021-06-24', description: 'São João - Lei estadual nº 5.508/1993', expectedResult: false },
@@ -380,13 +380,13 @@ describe('É dia útil no estado de Alagoas?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'AL')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'AL')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado do Distrito Federal?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-04-21', description: 'Fundação de Brasília - Coincide com o feriado nacional de Tiradentes', expectedResult: false },
     { givenDate: '2019-11-30', description: 'Dia do evangélico - Lei distrital nº 963/1995', expectedResult: false },
     { givenDate: '2020-11-30', description: 'Dia do evangélico - Lei distrital nº 963/1995', expectedResult: false },
@@ -395,13 +395,13 @@ describe('É dia útil no estado do Distrito Federal?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'DF')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'DF')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado do Ceará?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-03-19', description: 'Dia de São José (Padroeiro do Ceará) - Lei Federal nº 9.093/1995', expectedResult: false },
     { givenDate: '2019-03-25', description: 'Data magna do estado (data da abolição da escravidão no Ceará) - Art. 18, parágrafo único da constituição estadual', expectedResult: false },
     { givenDate: '2019-08-15', description: 'Dia de Nossa Senhora da Assunção (Padroeira de Fortaleza) - Lei Federal nº 9.093/1995', expectedResult: false }
@@ -409,13 +409,13 @@ describe('É dia útil no estado do Ceará?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'CE')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'CE')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado da Bahia?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2002-07-02', description: 'Independência da Bahia (Data magna do estado) - Art. 6º, § 3º da Constituição estadual', expectedResult: false },
     { givenDate: '2003-07-02', description: 'Independência da Bahia (Data magna do estado) - Art. 6º, § 3º da Constituição estadual', expectedResult: false },
     { givenDate: '2010-07-02', description: 'Independência da Bahia (Data magna do estado) - Art. 6º, § 3º da Constituição estadual', expectedResult: false },
@@ -426,13 +426,13 @@ describe('É dia útil no estado da Bahia?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'BA')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'BA')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado do Amazonas?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-09-05', description: 'Elevação do Amazonas à categoria de província - Lei estadual nº 25/1977', expectedResult: false },
     { givenDate: '2019-11-20', description: 'Dia da Consciência Negra - Lei estadual nº 84/2010', expectedResult: false },
     { givenDate: '2019-12-08', description: 'Nossa Senhora da Conceição', expectedResult: false },
@@ -441,19 +441,19 @@ describe('É dia útil no estado do Amazonas?', function () {
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'AM')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'AM')).to.equal(test.expectedResult)
     })
   })
 })
 
 describe('É dia útil no estado do Amapá?', function () {
-  var tests = [
+  const tests = [
     { givenDate: '2019-03-19', description: 'Dia de São José, santo padroeiro do Estado do Amapá - Lei estadual nº 667, de 16 de abril de 2002', expectedResult: false },
     { givenDate: '2019-09-13', description: 'Criação do Território Federal (Data Magna do estado) - Art. 335 da Constituição estadual', expectedResult: false }
   ]
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
-      expect(ehDiaUtil(test.givenDate, 'AP')).to.equal(test.expectedResult)
+      chai.expect(isBusinessDay(test.givenDate, 'AP')).to.equal(test.expectedResult)
     })
   })
 })
