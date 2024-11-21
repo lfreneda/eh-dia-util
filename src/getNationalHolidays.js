@@ -48,7 +48,8 @@ const getNationalHolidays = (year) => {
     { date: moment(`${String(year)}-10-12`), description: 'Nossa Senhora da Conceição Aparecida, popularmente chamada de Nossa Senhora Aparecida, é a padroeira do Brasil. Sua festa litúrgica é celebrada em 12 de outubro, um feriado nacional no Brasil desde 1980.' },
     { date: moment(`${String(year)}-11-02`), description: 'Dia dos Fiéis Defuntos ou Dia de Finados (conhecido ainda como Dia dos Mortos no México) é celebrado pela Igreja Católica no dia 2 de novembro.' },
     { date: moment(`${String(year)}-11-15`), description: 'A Proclamação da República Brasileira foi um levante político-militar ocorrido em 15 de novembro de 1889 que instaurou a forma republicana federativa presidencialista do governo no Brasil, derrubando a monarquia constitucional parlamentarista do Império do Brasil e, por conseguinte, pondo fim à soberania do imperador D. Pedro II. Foi, então, proclamada a República do Brasil.' },
-    { date: moment(`${String(year)}-12-25`), description: 'Natal ou Dia de Natal é um feriado e festival religioso cristão comemorado anualmente em 25 de dezembro. A data é o centro das festas de fim de ano e da temporada de férias, sendo, no cristianismo, o marco inicial do Ciclo do Natal, que dura doze dias.' }
+    { date: moment(`${String(year)}-12-25`), description: 'Natal ou Dia de Natal é um feriado e festival religioso cristão comemorado anualmente em 25 de dezembro. A data é o centro das festas de fim de ano e da temporada de férias, sendo, no cristianismo, o marco inicial do Ciclo do Natal, que dura doze dias.' },
+    { date: moment(`${String(year)}-11-20`), description: 'O Dia Nacional de Zumbi e da Consciência Negra é celebrado, no Brasil, em 20 de novembro. Concebido em 1971, foi formalizado nacionalmente em 2003, como uma efeméride no calendário escolar, até ser instituído como data comemorativa em 2011. Foi oficializado feriado nacional em 21 de dezembro de 2023.' }
   ]
 }
 
