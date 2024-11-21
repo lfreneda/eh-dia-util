@@ -60,7 +60,8 @@ describe('É dia útil? (Não considerando o estado)', function () {
     { givenDate: '2019-04-19', description: 'Sexta-feira Santa 2019', expectedResult: false },
     { givenDate: '2017-04-16', description: 'Páscoa 2017', expectedResult: false },
     { givenDate: '2018-04-01', description: 'Páscoa 2018', expectedResult: false },
-    { givenDate: '2019-04-21', description: 'Páscoa 2019', expectedResult: false }
+    { givenDate: '2019-04-21', description: 'Páscoa 2019', expectedResult: false },
+    { givenDate: '2024-11-20', description: 'Consciência Negra 2024', expectedResult: false }
   ]
 
   tests.forEach(function (test) {
