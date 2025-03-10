@@ -61,7 +61,8 @@ describe('É dia útil? (Não considerando o estado)', function () {
     { givenDate: '2017-04-16', description: 'Páscoa 2017', expectedResult: false },
     { givenDate: '2018-04-01', description: 'Páscoa 2018', expectedResult: false },
     { givenDate: '2019-04-21', description: 'Páscoa 2019', expectedResult: false },
-    { givenDate: '2024-11-20', description: 'Consciência Negra 2024', expectedResult: false }
+    { givenDate: '2024-11-20', description: 'Consciência Negra 2024', expectedResult: false },
+    { givenDate: '2025-03-04', description: 'Carnaval 2025', expectedResult: false }
   ]
 
   tests.forEach(function (test) {
@@ -454,6 +455,20 @@ describe('É dia útil no estado do Amapá?', function () {
   tests.forEach(function (test) {
     it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
       expect(ehDiaUtil(test.givenDate, 'AP')).to.equal(test.expectedResult)
+    })
+  })
+})
+
+describe('É dia útil na segunda de carnaval declarado como ponto facultativo?', function () {
+  var tests = [
+    { givenDate: '2025-03-03', description: 'Segunda de carnaval', expectedResult: false },
+    { givenDate: '2025-31-12', description: 'Ano novo', expectedResult: false },
+    { givenDate: '2025-09-01', description: 'Teste', expectedResult: true }
+  ]
+
+  tests.forEach(function (test) {
+    it('Dado dia ' + moment(test.givenDate).format('YYYY-MM-DD') + ' (que é ' + test.description + '), o resultado esperado é ' + test.expectedResult, function () {
+      expect(ehDiaUtil(test.givenDate, 'AP', true)).to.equal(test.expectedResult)
     })
   })
 })

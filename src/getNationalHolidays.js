@@ -30,13 +30,26 @@ const _calculateGodsFriday = (easterDate) => {
   return easterDate.clone().add(-2, 'd')
 }
 
-const getNationalHolidays = (year) => {
+const _calculateOptionalPoints = (year, easterDate, optionalPoint) => {
+  const optionalPointsItems = []
+  if (optionalPoint) {
+    const carnivalOptionalPoint = easterDate.clone().add(-48, 'd')
+    const carnaval = { date: carnivalOptionalPoint, description: 'Ponto facultativo de Carnaval' }
+    const newYearsOptionalPoint = { date: moment(`${String(year)}-12-31`), description: 'O Dia da Fraternidade Universal ou Dia da Confraternização Universal é um feriado nacional no Brasil, comemorado no dia 1 de janeiro. Foi instituído por lei em 1935, por Getúlio Vargas.' }
+    optionalPointsItems.push(carnaval, newYearsOptionalPoint)
+  }
+  return optionalPointsItems
+}
+
+const getNationalHolidays = (year, optionalPoint) => {
   const easterDate = _calculateEaster(year)
   const corpusChristiDate = _calculateCorpusChristi(easterDate)
-  const carnivalDate = _calculateCarnival(easterDate)
+  const carnivalDate = _calculateCarnival(easterDate, optionalPoint)
   const godsFridayDate = _calculateGodsFriday(easterDate)
+  const optionalPoints = _calculateOptionalPoints(year, easterDate, optionalPoint)
 
   return [
+    ...optionalPoints,
     { date: easterDate, description: 'Páscoa ou Domingo da Ressurreição é uma festividade religiosa e um feriado que celebra a ressurreição de Jesus ocorrida três dias depois da sua crucificação no Calvário, conforme o relato do Novo Testamento.' },
     { date: corpusChristiDate, description: 'Corpus Christi (expressão latina que significa Corpo de Cristo), generalizada em Portugal como Corpo de Deus é um evento baseado em tradições católicas realizado na quinta-feira seguinte ao domingo da Santíssima Trindade, que, por sua vez, acontece no domingo seguinte ao de Pentecostes.' },
     { date: carnivalDate, description: 'Carnaval é um festival do cristianismo ocidental que ocorre antes da estação litúrgica da Quaresma. Os principais eventos ocorrem tipicamente durante fevereiro ou início de março, durante o período historicamente conhecido como Tempo da Septuagésima (ou pré-quaresma).' },
@@ -53,8 +66,8 @@ const getNationalHolidays = (year) => {
   ]
 }
 
-const isNationalHoliday = (givenDate) => {
-  const nationalHolidays = getNationalHolidays(givenDate.year())
+const isNationalHoliday = (givenDate, optionalPoint) => {
+  const nationalHolidays = getNationalHolidays(givenDate.year(), optionalPoint)
   for (const holiday of nationalHolidays) {
     if (holiday.date.isSame(givenDate, 'day')) {
       return true

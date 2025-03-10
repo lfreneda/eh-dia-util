@@ -2,7 +2,7 @@ const moment = require('moment')
 const { isNationalHoliday } = require('./getNationalHolidays')
 const { isStateHoliday } = require('./getStateHolidays')
 
-const ehDiaUtil = (date, stateCode) => {
+const ehDiaUtil = (date, stateCode, optionalPoint = false) => {
   const givenDate = moment(date)
   if (!givenDate.isValid()) {
     return false
@@ -12,7 +12,7 @@ const ehDiaUtil = (date, stateCode) => {
     return false
   }
 
-  if (ehFeriado(date, stateCode)) {
+  if (ehFeriado(date, stateCode, optionalPoint)) {
     return false
   }
 
@@ -25,12 +25,12 @@ const ehFinalDeSemana = (givenDate) => {
   return isWeekend
 }
 
-const ehFeriado = (date, stateCode) => {
+const ehFeriado = (date, stateCode, optionalPoint) => {
   const givenDate = moment(date)
   if (!givenDate.isValid()) {
     return false
   }
-  if (isNationalHoliday(givenDate) || isStateHoliday(givenDate, stateCode)) {
+  if (isNationalHoliday(givenDate, optionalPoint) || isStateHoliday(givenDate, stateCode)) {
     return true
   }
   return false
